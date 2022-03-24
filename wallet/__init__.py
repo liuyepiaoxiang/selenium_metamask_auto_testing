@@ -1,5 +1,5 @@
 from openpyxl import *
-
+import os
 # filename = '20220312_eth_uniswap_10.xlsx'
 
 
@@ -26,10 +26,15 @@ def getAddress(filename):
         print('未指定地址文件')
         return
     # 用户地址路径，以xlsx格式保存
-    file = '/Users/luoye/Downloads/TestNetwork/' + filename
+    file = getFilePath(filename)
     address_list = Excel(file).getColValues(1)
     return address_list
 
+def getFilePath(filename):
+    pwd=os.getcwd()
+    absPath = os.path.abspath(os.path.dirname(pwd))
+    filePath = os.path.join(absPath, 'address/' + filename)
+    return filePath
 
 def getSeedPhrase(filename, address):
     input_address = address
@@ -37,7 +42,7 @@ def getSeedPhrase(filename, address):
         print('未指定地址文件')
         return
     # 用户助记词路径，以xlsx格式保存，该路径由用户自行修改
-    file = '/Users/luoye/Downloads/TestNetwork/' + filename
+    file = getFilePath(filename)
     address_list = Excel(file).getColValues(1)
     mnemonic_list = Excel(file).getColValues(3)
 
