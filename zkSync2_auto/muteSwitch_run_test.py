@@ -1,6 +1,6 @@
 import selenium_metamask_automation as auto
 import time
-import wallet
+import wallet as wallet
 import random
 from selenium.common.exceptions import NoSuchElementException
 
@@ -12,7 +12,7 @@ long_dynamic_time = 45
 
 def runMuteSwitchTestnet(filename, addr):
     # 指定chromedriver路径
-    driver_path = '/Users/luoye/Downloads/tools/chromedriver'
+    driver_path = r'../config/chromedriver'
     driver = auto.launchSeleniumWebdriver(driver_path)
 
     def init():
@@ -160,9 +160,10 @@ def runMuteSwitchTestnet(filename, addr):
     token_b = random.choice(token_list_b)
     dai = 'DAI'
     eth = 'ETH'
+    usdc = 'USD Coin'
     swap(token_a, token_b)
     time.sleep(3)
-    addLP(dai, eth)
+    addLP(dai, usdc)
     # dai = 'DAI'
     # eth = 'Ethereum'
     # time.sleep(3)

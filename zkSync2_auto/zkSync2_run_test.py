@@ -6,7 +6,7 @@ import random
 
 def runTest(filename, addr):
     # 指定chromedriver路径
-    driver_path = '/Users/luoye/Downloads/tools/chromedriver'
+    driver_path = r'../config/chromedriver'
     driver = auto.launchSeleniumWebdriver(driver_path)
     # 打开zkSync2.0测试网
     driver.get('https://portal.zksync.io/')
@@ -45,7 +45,7 @@ def runTest(filename, addr):
     driver.find_element_by_xpath("//button[text()='Deposit']").click()
     time.sleep(15)
     # 确认交易
-    auto.confirmApprovalFromMetamask()
+    # auto.confirmApprovalFromMetamask()
     time.sleep(10)
     print('Deposit Success')
 
@@ -79,7 +79,7 @@ def runTest(filename, addr):
     driver.find_element_by_xpath("//a[text()='Transfer']").click()
     time.sleep(3)
     inputs = driver.find_elements_by_xpath('//input')
-    inputs[0].send_keys('0x7A9E49DAcFb35977762B9259DF1dC8880471f898')
+    inputs[0].send_keys('0x5E873566B73843A934AC80DC814AEb8f3BF76238')
     time.sleep(3)
     driver.find_element_by_xpath("//p[1]").click()
     time.sleep(1)
@@ -94,7 +94,7 @@ def runTest(filename, addr):
 
     # 退出
     time.sleep(5)
-    driver.get_screenshot_as_file('/Users/luoye/Downloads/TestNetwork/zkSync2/' + address + '.png')
+    # driver.get_screenshot_as_file('/Users/luoye/Downloads/TestNetwork/zkSync2/' + address + '.png')
     driver.quit()
 
 
