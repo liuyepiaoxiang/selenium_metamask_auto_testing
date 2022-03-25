@@ -67,6 +67,29 @@ def metamaskSetup(recoveryPhrase, password):
     driver.close()
     driver.switch_to.window(driver.window_handles[0])
 
+def addWalletByKey(key):
+    print("change wallet")
+    time.sleep(3)
+
+    driver.execute_script("window.open('');")
+    driver.switch_to.window(driver.window_handles[1])
+
+    driver.get('chrome-extension://{}/popup.html'.format(EXTENSION_ID))
+    time.sleep(5)
+    driver.find_element_by_xpath('//*[@id="app-content"]/div/div[1]/div/div[2]/div[2]').click()
+    time.sleep(5)
+    driver.find_element_by_xpath('//*[@id="app-content"]/div/div[3]/div[7]').click()
+    time.sleep(3)
+    input = driver.find_element_by_xpath('//*[@id="private-key-box"]')
+    input.send_keys(key)
+    time.sleep(3)
+    driver.find_element_by_xpath('//*[@id="app-content"]/div/div[3]/div/div/div[2]/div[2]/div[2]/button[2]').click()
+    time.sleep(5)
+    print("Wallet has been imported successfully")
+    # time.sleep(1)
+    driver.close()
+    driver.switch_to.window(driver.window_handles[0])
+
 
 def changeMetamaskNetwork(networkName):
     # opening network
@@ -283,3 +306,19 @@ def signReject():
     print(driver.window_handles)
     driver.switch_to.window(driver.window_handles[0])
     time.sleep(3)
+
+def changeWallet(i):
+    print("change wallet")
+    time.sleep(3)
+
+    driver.execute_script("window.open('');")
+    driver.switch_to.window(driver.window_handles[1])
+
+    driver.get('chrome-extension://{}/popup.html'.format(EXTENSION_ID))
+    time.sleep(5)
+    driver.find_element_by_xpath('//*[@id="app-content"]/div/div[1]/div/div[2]/div[2]').click()
+    time.sleep(5)
+    wallets = driver.find_element_by_xpath('//*[@id="app-content"]/div/div[3]/div[4]/div[3]')
+    wallets.find_element_by_class_name('account-menu__item--clickable')[i].click()
+    print('change wallet success')
+
