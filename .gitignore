@@ -2,3 +2,4 @@ address/*
 record/record.csv
 */result.txt
 .idea
+*/config.ini
