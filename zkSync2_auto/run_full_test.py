@@ -1,17 +1,21 @@
 import time
 import wallet
+from config import global_config
 import zkSync2_run_test as zkSync
 import muteSwitch_run_test as muteSwitch
 
-filename = 'address.xlsx'
-address_list = wallet.getAddress(filename)
-result = open('./result.txt', mode='a', encoding='utf-8')
-for i in range(1, 1001):
+wallet = wallet.getWallet()
+address_list = wallet[0]
+result_path = global_config.get('path', 'result_path').strip()
+result = open(str(result_path) + 'result.txt', mode='a', encoding='utf-8')
+
+for i in range(1, 101):
     address = address_list[i]
     try:
-        zkSync.runTest(filename, address)
+        zkSync.runTest(address)
         time.sleep(3)
-        muteSwitch.runMuteSwitchTestnet(filename, address)
+        # muteSwitch可能存在一系列未知问题
+        muteSwitch.runMuteSwitchTestnet(address)
         time.sleep(3)
     except Exception as e:
         print(e)
